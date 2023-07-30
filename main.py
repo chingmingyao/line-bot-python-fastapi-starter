@@ -7,9 +7,11 @@ from starlette.requests import Request
 from models.message_request import MessageRequest
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage
+from linebot.models import MessageEvent, TextSendMessage,TextMessage
 from skills import *
 from skills import skills
+from pathlib import Path
+from linebot.models.messages import ImageMessage, FileMessage,LocationMessage
 
 app = FastAPI()
 
@@ -36,6 +38,7 @@ async def callback(request: Request, x_line_signature: str = Header(None)):
     
 @handler.add(event=MessageEvent, message=TextMessage)
 def handle_message(event):
+    print(event)
     msg_request = MessageRequest()
     msg_request.intent = event.message.text
     msg_request.message = event.message.text
@@ -43,3 +46,38 @@ def handle_message(event):
     
     func = get_message(msg_request)
     line_bot_api.reply_message(event.reply_token, func)
+
+@handler.add(event=MessageEvent, message=ImageMessage)
+def handle_message(event):
+    print('image', event)
+    #取得訊息ID
+    message_id = event.message.id
+    print(message_id)
+    #透訊息ID取得ｌｉｎｅ　ｓｅｒｖｅｒ上的圖片
+    message_content = line_bot_api.get_message_content(message_id)
+    #將圖片存到伺服器上
+    with open(Path(f'images/{message_id}.jpg').absolute(),"wb") as fd:
+        for chunk in message_content.iter_content():
+            fd.write(chunk)
+
+@handler.add(event=MessageEvent, message=LocationMessage)
+def handle_message(event):
+    print('location', event)
+    print('-----')
+    print(event.message.latitude)
+    print(event.message.longitude)
+
+
+# @handler.add(event=MessageEvent, message=FileMessage)
+# def handle_message(event):
+#     print('file', event)
+#     static_tmp_path = os.path.join(os.path.dirname(__file__), 'files')
+#     message_content = line_bot_api.get_message_content(event.message.id)
+#     with tempfile.NamedTemporaryFile(dir=static_tmp_path, prefix='file-', delete=False) as tf:
+#         for chunk in message_content.iter_content():
+#             tf.write(chunk)
+#         tempfile_path = tf.name
+
+#     dist_path = tempfile_path + '-' + event.message.file_name
+#     dist_name = os.path.basename(dist_path)
+#     os.rename(tempfile_path, dist_path)
