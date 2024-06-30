@@ -53,12 +53,12 @@ def handle_message(event):
 @handler.add(event=MessageEvent, message=ImageMessage)
 def handle_message(event):
     print('image', event)
-    #¨ú±o°T®§ID
+    #å–å¾—è¨Šæ¯ID
     message_id = event.message.id
     print(message_id)
-    #³z°T®§ID¨ú±o¢ô¢ñ¢ö¢í¡@¢û¢í¢ú¢ş¢í¢ú¤Wªº¹Ï¤ù
+    #é€è¨Šæ¯IDå–å¾—ï½Œï½‰ï½ï½…ã€€ï½“ï½…ï½’ï½–ï½…ï½’ä¸Šçš„åœ–ç‰‡
     message_content = line_bot_api.get_message_content(message_id)
-    #±N¹Ï¤ù¦s¨ì¦øªA¾¹¤W
+    #å°‡åœ–ç‰‡å­˜åˆ°ä¼ºæœå™¨ä¸Š
     with open(Path(f'images/{message_id}.jpg').absolute(),"wb") as fd:
         for chunk in message_content.iter_content():
             fd.write(chunk)
@@ -72,5 +72,5 @@ def handle_message(event):
 
 if __name__ == "__main__":
    
-    uvicorn.run(app, host="0.0.0.0", port=8000) 
+    #uvicorn.run(app, host="0.0.0.0", port=8000) 
 
