@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import re
 from fastapi import FastAPI, HTTPException
@@ -12,7 +13,9 @@ from skills import *
 from skills import skills
 from pathlib import Path
 from linebot.models.messages import ImageMessage, FileMessage,LocationMessage
-
+import uvicorn
+ 
+ 
 app = FastAPI()
 
 load_dotenv()
@@ -67,17 +70,7 @@ def handle_message(event):
     print(event.message.latitude)
     print(event.message.longitude)
 
+if __name__ == "__main__":
+   
+    uvicorn.run(app, host="0.0.0.0", port=8000) 
 
-# @handler.add(event=MessageEvent, message=FileMessage)
-# def handle_message(event):
-#     print('file', event)
-#     static_tmp_path = os.path.join(os.path.dirname(__file__), 'files')
-#     message_content = line_bot_api.get_message_content(event.message.id)
-#     with tempfile.NamedTemporaryFile(dir=static_tmp_path, prefix='file-', delete=False) as tf:
-#         for chunk in message_content.iter_content():
-#             tf.write(chunk)
-#         tempfile_path = tf.name
-
-#     dist_path = tempfile_path + '-' + event.message.file_name
-#     dist_name = os.path.basename(dist_path)
-#     os.rename(tempfile_path, dist_path)
