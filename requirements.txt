@@ -2,3 +2,4 @@ fastAPI
 uvicorn
 line-bot-sdk
 python-dotenv
+pyproj==3.6.1
