@@ -148,6 +148,6 @@ def taipower_loc(lon:int,lat:int)->str:
     return taipowerloc
    
 def tai_to_loc(tai):
-    import trans_map
-    lat, lon = trans_map.tai_to_wgs(tai)
+  
+    lat, lon = tai_to_wgs(tai)
     return lat, lon

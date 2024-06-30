@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "skills"
+	},
+	{
+		"path": "."
+	},
+	{
+		"path": "../Python"
+	}
+],
+  "settings": {}
+}
