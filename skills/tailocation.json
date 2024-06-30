@@ -1,0 +1,56 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "座標轉換",
+          "weight": "bold",
+          "size": "xxl",
+          "color": "#00EC00"
+        },
+        {
+          "type": "text",
+          "text": "台電座標 G3320AB52",
+          "color": "#0080FF",
+          "weight": "bold",
+          "size": "xl"
+        },
+        {
+          "type": "separator"
+        },
+        {
+          "type": "text",
+          "text": "經緯度 24.12455,120.55656",
+          "weight": "bold",
+          "size": "sm"
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "style": "link",
+          "height": "sm",
+          "action": {
+            "type": "uri",
+            "label": "前往地點",
+            "uri": "https://line.me/"
+          }
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [],
+          "margin": "sm"
+        }
+      ],
+      "flex": 0
+    }
+  }
