@@ -31,8 +31,7 @@ def get(message_request: MessageRequest):
     
 def tai_to_loc(tai):
     
-    import trans_map
-    lat, lon = trans_map.tai_to_wgs(tai)
+    lat, lon = tai_to_wgs(tai)
     return lat, lon
 
 TWD97 = pyproj.Proj(3826) #定義TWD97坐標系 121分帶
