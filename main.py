@@ -7,6 +7,7 @@ from fastapi.params import Header
 from starlette.requests import Request
 from models.message_request import MessageRequest
 from linebot import LineBotApi, WebhookHandler
+
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextSendMessage,TextMessage
 from skills import *
@@ -70,7 +71,7 @@ def handle_message(event):
     print(event.message.latitude)
     print(event.message.longitude)
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
    
-#     uvicorn.run(app, host="0.0.0.0", port=8000) 
+    uvicorn.run(app, host="0.0.0.0", port=8000) 
 
