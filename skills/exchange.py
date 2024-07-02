@@ -49,7 +49,7 @@ def convert(code: str, twd: float):
         
         currency.columns = ["幣別","現金匯率-本行買入","現金匯率-本行賣出","即期匯率-本行買入","即期匯率-本行賣出"]
         
-        currency['幣別'] = currency['幣別'].str.extract('(\w+)')
+        currency['幣別'] = currency['幣別'].str.extract(r'(\w+)')
         
         # 進行轉換
         r = list(filter(lambda c: c[0] == code, currency.to_numpy()))
