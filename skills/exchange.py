@@ -31,7 +31,7 @@ def get(message_request: MessageRequest):
     
     except Exception as e:
         print(e)
-        msg1 = TextSendMessage(text=f'請輸入格式為/匯率 幣別 金額') 
+        msg1 = TextSendMessage(text=f'錯誤訊息：{e} json路徑{(os.path.join(os.getcwd(), 'skills', 'exchange.json'))}請輸入格式為/匯率 幣別 金額') 
         return [     msg1    ]
 
 
