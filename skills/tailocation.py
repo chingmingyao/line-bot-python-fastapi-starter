@@ -165,7 +165,7 @@ def get(message_request: MessageRequest):
     #     msg
     # ]
     
-    msg2 = FlexSendMessage(contents=flex)
+    msg2 = FlexSendMessage(alt_text='匯率轉換',contents=flex)
     return [
         msg2
     ]
