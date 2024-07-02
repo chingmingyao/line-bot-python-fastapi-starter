@@ -9,21 +9,24 @@ def get(message_request: MessageRequest):
     # /匯率 美金 1000
     msg_array = message_request.message.split()
     
-    convert_currency = msg_array[1]
-    twd = msg_array[2]
-    
-    result = convert(convert_currency, float(twd))
-    
-    flex = json.load(open(os.path.join(os.getcwd(), 'skills', 'tailocation.json'), 'r', encoding='utf-8'))
-    
-    flex['body']['contents'][0]['text'] = f'(匯率轉換 (新台幣 -> {convert_currency}))'
-    flex['body']['contents'][1]['text'] = f'(新臺幣 {twd})'
-    flex['body']['contents'][3]['text'] = f'(可換得{convert_currency} {result})'
-    
-    msg = FlexSendMessage(alt_text='匯率轉換', contents=flex)
-    
-    return [      msg    ]
-
+    try:
+        convert_currency = msg_array[1]
+        twd = msg_array[2]
+        
+        result = convert(convert_currency, float(twd))
+        
+        flex = json.load(open(os.path.join(os.getcwd(), 'skills', 'tailocation.json'), 'r', encoding='utf-8'))
+        
+        flex['body']['contents'][0]['text'] = f'(匯率轉換 (新台幣 -> {convert_currency}))'
+        flex['body']['contents'][1]['text'] = f'(新臺幣 {twd})'
+        flex['body']['contents'][3]['text'] = f'(可換得{convert_currency} {result})'
+        
+        msg = FlexSendMessage(alt_text='匯率轉換', contents=flex)
+        
+        return [      msg    ]
+    except Exception as e:
+        print(e)
+        return [      e    ]
 
 def convert(code: str, twd: float):
     # 用爬蟲取得表格內容
