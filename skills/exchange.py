@@ -7,9 +7,10 @@ import os
 @add_skill('/匯率')
 def get(message_request: MessageRequest):
     # /匯率 美金 1000
-    msg_array = message_request.message.split()
-    
     try:
+        msg_array = message_request.message.split()
+    
+    
         convert_currency = msg_array[1]
         twd = msg_array[2]
         
