@@ -164,9 +164,17 @@ def get(message_request: MessageRequest):
     # return [
     #     msg
     # ]
+    try:
+        flex = json.load(open(os.path.join(os.getcwd(), 'skills', 'tailocation.json'), 'r', encoding='utf-8'))
+        msg2 = FlexSendMessage(alt_text='匯率轉換',contents=flex)
+        return [
+        msg2]
+        
+    except Exception as e:
+        print(f"Error loading JSON: {e}")
+        msg = TextSendMessage(text=f"Error loading JSON: {e}")
+        return [
+            msg
+        ]
     
-    msg2 = FlexSendMessage(alt_text='匯率轉換',contents=flex)
-    return [
-        msg2
-    ]
     
