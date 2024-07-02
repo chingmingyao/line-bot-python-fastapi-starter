@@ -134,38 +134,21 @@ def taipower_loc(lon:int,lat:int)->str:
 @add_skill('/台電')
 def get(message_request: MessageRequest):
     
-    # msg_array = message_request.message.split()
-    # tai= msg_array[1]
-    # result = tai_to_loc(tai)
+    msg_array = message_request.message.split()
+    tai= msg_array[1]
+    result = tai_to_loc(tai)
     
-    # flex = json.load(open(os.getcwd()+
-    #                       '\\skills\\' 'tailocation.json','r',encoding='utf-8'))
-    # flex['body']['contents'][1]['text'] = f'台電座標 {tai}'
-    # flex['body']['contents'][3]['text'] = f'經緯度 {result[0]},{result[1]}'
-    # print(f'經緯度 {result[0]},{result[1]}')
-    # flex['footer']['contents'][0]['action']['uri'] = f'https://www.google.com.tw/maps/place/{result[0]},{result[1]}'
-    # print(f"google https://www.google.com.tw/maps/place/{result[0]},{result[1]}")
-  
+    
+    
   
     
-    # flex = json.load(open(os.getcwd()+
-    #                       '\\skills\\' 'tailocation.json','r',encoding='utf-8'))
-    # flex['body']['contents'][1]['text'] = f'台電座標 '
-    # flex['body']['contents'][3]['text'] = f'經緯度 '
-    # print(f'經緯度 ')
-    # flex['footer']['contents'][0]['action']['uri'] = f'https://www.google.com.tw/maps/place/'
-    # print(f"google https://www.google.com.tw/maps/place")
-   
-   
-    # flex = json.load(open(os.getcwd()+
-    #                       '\\skills\\' 'tailocation.json','r',encoding='utf-8'))
-    # flex = os.getcwd()+ '\\skills\\tailocation.json'
-    # msg = TextSendMessage(text=flex)
-    # return [
-    #     msg
-    # ]
     try:
         flex = json.load(open(os.path.join(os.getcwd(), 'skills', 'tailocation.json'), 'r', encoding='utf-8'))
+        flex['body']['contents'][1]['text'] = f'台電座標 {tai}'
+        flex['body']['contents'][3]['text'] = f'經緯度 {result[0]},{result[1]}'
+        print(f'經緯度 {result[0]},{result[1]}')
+        flex['footer']['contents'][0]['action']['uri'] = f'https://www.google.com.tw/maps/place/{result[0]},{result[1]}'
+        print(f"google https://www.google.com.tw/maps/place/{result[0]},{result[1]}")
         msg2 = FlexSendMessage(alt_text='匯率轉換',contents=flex)
         return [
         msg2]
