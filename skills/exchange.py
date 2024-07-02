@@ -20,11 +20,13 @@ def get(message_request: MessageRequest):
         result = convert(convert_currency, float(twd))
         
         flex = json.load(open(os.path.join(os.getcwd(), 'skills', 'exchange.json'), 'r', encoding='utf-8'))
-        
-        flex['body']['contents'][0]['text'] = f'匯率轉換 (新台幣 -> {convert_currency})'
-        flex['body']['contents'][1]['text'] = f'新臺幣 {twd}'
-        flex['body']['contents'][3]['text'] = f'可換得{convert_currency} {result}'
-        
+        try:
+            flex['body']['contents'][0]['text'] = f'匯率轉換 (新台幣 -> {convert_currency})'
+            flex['body']['contents'][1]['text'] = f'新臺幣 {twd}'
+            flex['body']['contents'][3]['text'] = f'可換得{convert_currency} {result}'
+        except Exception as e:
+            print(e)  
+            return TextSendMessage(text=f"幣值轉換錯誤{e}")
         msg = FlexSendMessage(alt_text='匯率轉換', contents=flex)
         
         return [      msg    ]
