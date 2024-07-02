@@ -157,8 +157,8 @@ def get(message_request: MessageRequest):
     # print(f"google https://www.google.com.tw/maps/place")
    
    
-    flex = json.load(open(os.getcwd()+
-                          '\\skills\\' 'tailocation.json','r',encoding='utf-8'))
+    # flex = json.load(open(os.getcwd()+
+    #                       '\\skills\\' 'tailocation.json','r',encoding='utf-8'))
     # flex = os.getcwd()+ '\\skills\\tailocation.json'
     # msg = TextSendMessage(text=flex)
     # return [
