@@ -148,17 +148,18 @@ def get(message_request: MessageRequest):
   
   
     
-    flex = json.load(open(os.getcwd()+
-                          '\\skills\\' 'tailocation.json','r',encoding='utf-8'))
-    flex['body']['contents'][1]['text'] = f'台電座標 '
-    flex['body']['contents'][3]['text'] = f'經緯度 '
-    print(f'經緯度 ')
-    flex['footer']['contents'][0]['action']['uri'] = f'https://www.google.com.tw/maps/place/'
-    print(f"google https://www.google.com.tw/maps/place")
+    # flex = json.load(open(os.getcwd()+
+    #                       '\\skills\\' 'tailocation.json','r',encoding='utf-8'))
+    # flex['body']['contents'][1]['text'] = f'台電座標 '
+    # flex['body']['contents'][3]['text'] = f'經緯度 '
+    # print(f'經緯度 ')
+    # flex['footer']['contents'][0]['action']['uri'] = f'https://www.google.com.tw/maps/place/'
+    # print(f"google https://www.google.com.tw/maps/place")
    
    
-    msg = FlexSendMessage(alt_text='座標轉換',contents=flex)
-    
+    # msg = FlexSendMessage(alt_text='座標轉換',contents=flex)
+    flex = os.getcwd()+ '\\skills\\tailocation.json'
+    msg = TextSendMessage(text=flex)
     return [
         msg
     ]
