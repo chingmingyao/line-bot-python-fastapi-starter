@@ -149,15 +149,16 @@ def get(message_request: MessageRequest):
         flex['footer']['contents'][0]['action']['uri'] = f'https://www.google.com.tw/maps/place/{result[0]},{result[1]}'
         print(f"google https://www.google.com.tw/maps/place/{result[0]},{result[1]}")
         msg2 = FlexSendMessage(alt_text='匯率轉換',contents=flex)
-        msg1 = TextSendMessage(os.path.join(os.getcwd(), 'skills', 'tailocation.json'))
+        
         return [
-        msg2,msg1]
+        msg2]
         
     except Exception as e:
         print(f"Error loading JSON: {e}")
         msg = TextSendMessage(text=f"Error loading JSON: {e}")
+        msg1= TextSendMessage(os.path.join(os.getcwd(), 'skills', 'tailocation.json'))
         return [
-            msg
+            msg,msg1
         ]
     
     

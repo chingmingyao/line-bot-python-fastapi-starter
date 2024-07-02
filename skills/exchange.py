@@ -4,7 +4,6 @@ from skills import add_skill
 import pandas as pd
 import json
 import os
-
 @add_skill('/匯率')
 def get(message_request: MessageRequest):
     # /匯率 美金 1000
@@ -15,18 +14,15 @@ def get(message_request: MessageRequest):
     
     result = convert(convert_currency, float(twd))
     
-    flex = json.load(
-        open(os.getcwd() + '\\skills\\' 'exchange.json', 'r', encoding='utf-8'))
+    flex = json.load(open(os.path.join(os.getcwd(), 'skills', 'tailocation.json'), 'r', encoding='utf-8'))
     
-    flex['body']['contents'][0]['text'] = f'匯率轉換 (新台幣 -> {convert_currency})'
-    flex['body']['contents'][1]['text'] = f'新臺幣 {twd}'
-    flex['body']['contents'][3]['text'] = f'可換得{convert_currency} {result}'
+    flex['body']['contents'][0]['text'] = f'(匯率轉換 (新台幣 -> {convert_currency}))'
+    flex['body']['contents'][1]['text'] = f'(新臺幣 {twd})'
+    flex['body']['contents'][3]['text'] = f'(可換得{convert_currency} {result})'
     
     msg = FlexSendMessage(alt_text='匯率轉換', contents=flex)
     
-    return [
-        msg
-    ]
+    return [      msg    ]
 
 
 def convert(code: str, twd: float):
@@ -38,10 +34,9 @@ def convert(code: str, twd: float):
     # 取得全部 rows, 並前5筆column
     currency = df.iloc[:, :5]
     
-    currency.columns = [u"幣別", u"現金匯率-本行買入",
-                        u"現金匯率-本行賣出", u"即期匯率-本行買入", u"即期匯率-本行賣出"]
+    currency.columns = ["幣別","現金匯率-本行買入","現金匯率-本行賣出","即期匯率-本行買入","即期匯率-本行賣出"]
     
-    currency[u'幣別'] = currency[u'幣別'].str.extract('(\w+)')
+    currency['幣別'] = currency['幣別'].str.extract('(\w+)')
     
     # 進行轉換
     r = list(filter(lambda c: c[0] == code, currency.to_numpy()))
