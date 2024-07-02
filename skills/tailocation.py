@@ -160,7 +160,13 @@ def get(message_request: MessageRequest):
     flex = json.load(open(os.getcwd()+
                           '\\skills\\' 'tailocation.json','r',encoding='utf-8'))
     # flex = os.getcwd()+ '\\skills\\tailocation.json'
-    msg = TextSendMessage(text=flex)
+    # msg = TextSendMessage(text=flex)
+    # return [
+    #     msg
+    # ]
+    
+    msg2 = FlexSendMessage(contents=flex)
     return [
-        msg
+        msg2
     ]
+    
