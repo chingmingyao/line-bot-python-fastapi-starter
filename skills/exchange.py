@@ -15,8 +15,7 @@ def get(message_request: MessageRequest):
     
     result = convert(convert_currency, float(twd))
     
-    flex = json.load(
-        open(os.getcwd() + '\\skills\\' 'exchange.json', 'r', encoding='utf-8'))
+    flex = json.load(open(os.path.join(os.getcwd() ,'skills' 'exchange.json'), 'r', encoding='utf-8'))
     
     flex['body']['contents'][0]['text'] = f'匯率轉換 (新台幣 -> {convert_currency})'
     flex['body']['contents'][1]['text'] = f'新臺幣 {twd}'
