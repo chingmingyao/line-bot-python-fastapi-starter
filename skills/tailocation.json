@@ -1,56 +1,89 @@
 {
-    "type": "bubble",
-    "body": {
-      "type": "box",
-      "layout": "vertical",
-      "contents": [
-        {
-          "type": "text",
-          "text": "座標轉換",
-          "weight": "bold",
-          "size": "xxl",
-          "color": "#00EC00"
-        },
-        {
-          "type": "text",
-          "text": "台電座標 G3320AB52",
-          "color": "#0080FF",
-          "weight": "bold",
-          "size": "xl"
-        },
-        {
-          "type": "separator"
-        },
-        {
-          "type": "text",
-          "text": "經緯度 24.12455,120.55656",
-          "weight": "bold",
-          "size": "sm"
-        }
-      ]
-    },
-    "footer": {
-      "type": "box",
-      "layout": "vertical",
-      "spacing": "sm",
-      "contents": [
-        {
-          "type": "button",
-          "style": "link",
-          "height": "sm",
-          "action": {
-            "type": "uri",
-            "label": "前往地點",
-            "uri": "https://line.me/"
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "座標轉換",
+        "weight": "bold",
+        "size": "xl",
+        "color": "#00EC00"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "台電座標",
+                "color": "#0000C6",
+                "size": "md",
+                "flex": 1
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "經緯度",
+                "color": "#BB3D00",
+                "size": "md",
+                "flex": 1
+              }
+            ]
           }
-        },
-        {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [],
-          "margin": "sm"
+        ]
+      },
+      {
+        "type": "separator"
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "uri",
+          "label": "前往Google 地圖",
+          "uri": "https://line.me/"
         }
-      ],
-      "flex": 0
-    }
+      },
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "uri",
+          "label": "前往地籍圖",
+          "uri": "https://line.me/"
+        }
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [],
+        "margin": "sm"
+      }
+    ],
+    "flex": 0
   }
+}

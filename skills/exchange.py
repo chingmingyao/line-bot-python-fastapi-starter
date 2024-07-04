@@ -40,7 +40,7 @@ def convert(code: str, twd: float):
     currency.columns = [u"幣別", u"現金匯率-本行買入",
                         u"現金匯率-本行賣出", u"即期匯率-本行買入", u"即期匯率-本行賣出"]
     
-    currency[u'幣別'] = currency[u'幣別'].str.extract('(\w+)')
+    currency[u'幣別'] = currency[u'幣別'].str.extract(r'(\w+)')
     
     # 進行轉換
     r = list(filter(lambda c: c[0] == code, currency.to_numpy()))
