@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-import os
-import re
+import os,re,sqlite3
 from fastapi import FastAPI, HTTPException
 from dotenv import load_dotenv
 from fastapi.params import Header
@@ -23,6 +22,29 @@ load_dotenv()
 
 line_bot_api = LineBotApi(os.getenv('LINE_CHANNEL_ACCESS_TOKEN'))
 handler = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
+
+
+DATABASE = 'test.db'
+def get_db_connection():
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def create_tables():
+    conn = get_db_connection()
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT NOT NULL,
+            message TEXT NOT NULL,
+            intent TEXT NOT NULL
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+
+
 
 def get_message(request: MessageRequest):
     for pattern, skill in skills.items():
@@ -48,6 +70,16 @@ def handle_message(event):
     msg_request.message = event.message.text
     msg_request.user_id = event.source.user_id
     
+    
+        # Save message to the database
+    conn = get_db_connection()
+    conn.execute(
+        "INSERT INTO messages (user_id, message, intent) VALUES (?, ?, ?)",
+        (msg_request.user_id, msg_request.message, msg_request.intent)
+    )
+    conn.commit()
+    conn.close()
+
     func = get_message(msg_request)
     line_bot_api.reply_message(event.reply_token, func)
 
